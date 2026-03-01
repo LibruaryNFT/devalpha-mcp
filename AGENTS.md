@@ -2,9 +2,9 @@
 
 ## What is DevAlpha?
 
-DevAlpha is a decision engine for Web3 builders: **"Which chain should I build on, and what should I build there?"**
+DevAlpha is a decision engine for builders: **"Which ecosystem should I build on, and what should I build there?"**
 
-It tracks 25+ blockchains with real-time metrics (TVL, fees, dev activity) and aggregates hackathons, bounties, grants, and demand signals from Reddit, HN, GitHub, and Web3 platforms.
+It tracks 50+ ecosystems — blockchains (Ethereum, Solana, Base, etc.) and AI platforms (OpenAI, Anthropic, Hugging Face, etc.) — with real-time metrics (TVL, fees, dev activity) and aggregates hackathons, bounties, grants, and demand signals from Reddit, HN, GitHub, and Web3 platforms.
 
 ## MCP Server
 

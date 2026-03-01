@@ -1,6 +1,6 @@
 # DevAlpha MCP Server
 
-An [MCP](https://modelcontextprotocol.io) server that gives AI agents access to Web3 builder intelligence — chain metrics, developer activity, hackathons, bounties, grants, and demand signals across 25+ blockchains.
+An [MCP](https://modelcontextprotocol.io) server that gives AI agents access to builder intelligence — ecosystem metrics, developer activity, hackathons, bounties, grants, and demand signals across 50+ ecosystems (blockchains + AI platforms).
 
 Powered by [DevAlpha](https://devalpha.dev).
 

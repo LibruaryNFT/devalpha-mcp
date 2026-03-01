@@ -1,8 +1,10 @@
 """
-DevAlpha MCP Server — AI-native on-chain intelligence infrastructure.
+DevAlpha MCP Server — builder intelligence for AI agents.
 
-Connects AI agents to DevAlpha's chain intelligence, opportunity discovery,
+Connects AI agents to DevAlpha's ecosystem intelligence, opportunity discovery,
 and developer activity data via the public REST API at https://devalpha.dev.
+Covers 50+ ecosystems: blockchains (Ethereum, Solana, Base, Arbitrum, etc.)
+and AI platforms (OpenAI, Anthropic, Hugging Face, LangChain, etc.).
 
 Usage:
     python -m devalpha_mcp                    # stdio transport (Claude Desktop, Cursor, etc.)
@@ -67,7 +69,7 @@ def _api_get(path: str, params: dict | None = None) -> dict:
 
 mcp = FastMCP(
     "devalpha",
-    instructions="DevAlpha — Web3 builder intelligence. Chain metrics, developer activity, hackathons, bounties, grants, and demand signals across 25+ blockchains.",
+    instructions="DevAlpha — builder intelligence across 50+ ecosystems (blockchains + AI platforms). Chain metrics, developer activity, hackathons, bounties, grants, and demand signals.",
 )
 
 
