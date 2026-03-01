@@ -1,0 +1,23 @@
+name: devalpha
+description: Web3 builder intelligence — chain metrics, developer activity, hackathons, bounties, grants across 25+ blockchains
+icon: https://devalpha.dev/favicon.svg
+sourceUrl: https://github.com/LibruaryNFT/devalpha-mcp
+homepage: https://devalpha.dev
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      DEVALPHA_API_URL:
+        type: string
+        description: API base URL (default https://devalpha.dev/api)
+  commandFunction:
+    |-
+    (config) => ({
+      command: 'python',
+      args: ['-m', 'devalpha_mcp'],
+      env: {
+        DEVALPHA_API_URL: config.DEVALPHA_API_URL || 'https://devalpha.dev/api'
+      }
+    })
