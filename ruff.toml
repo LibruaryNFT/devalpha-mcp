@@ -1,0 +1,19 @@
+# Ruff linter configuration
+# https://docs.astral.sh/ruff/
+
+target-version = "py312"
+line-length = 120
+
+[lint]
+# E = pycodestyle errors, F = pyflakes, W = pycodestyle warnings, I = isort
+select = ["E", "F", "W", "I"]
+
+# Allow unused variables when underscore-prefixed
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.per-file-ignores]
+# Tests can use assert and have longer lines
+"tests/**" = ["E501"]
+
+[lint.isort]
+known-first-party = ["devalpha_mcp"]
