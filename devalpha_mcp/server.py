@@ -75,6 +75,7 @@ mcp = FastMCP(
 
 # ── Helpers ──────────────────────────────────────────────
 
+
 def _compact_usd(value):
     """Format USD value compactly."""
     if value is None:
@@ -129,6 +130,7 @@ def _json_response(data):
 
 # ── Tool 1: Compare Chains ──────────────────────────────
 
+
 @mcp.tool()
 async def compare_chains(
     sort_by: str = "tvl",
@@ -153,11 +155,17 @@ async def compare_chains(
     chains = [_format_chain(c) for c in items]
 
     result = _json_response({"chains": chains, "sorted_by": sort_by, "total": len(chains)})
-    _log_query("compare_chains", {"sort_by": sort_by, "chain_type": chain_type, "limit": limit}, len(result), (time.time() - t0) * 1000)
+    _log_query(
+        "compare_chains",
+        {"sort_by": sort_by, "chain_type": chain_type, "limit": limit},
+        len(result),
+        (time.time() - t0) * 1000,
+    )
     return result
 
 
 # ── Tool 2: Chain Detail ────────────────────────────────
+
 
 @mcp.tool()
 async def get_chain(slug: str) -> str:
@@ -212,9 +220,7 @@ async def get_chain(slug: str) -> str:
         parts.append(f"{result['opportunity_count']} active opportunities")
     if result.get("languages"):
         parts.append(f"Languages: {', '.join(result['languages'])}")
-    result["ecosystem_summary"] = ". ".join(
-        [parts[0] + ": " + ", ".join(parts[1:])] if len(parts) > 1 else parts
-    )
+    result["ecosystem_summary"] = ". ".join([parts[0] + ": " + ", ".join(parts[1:])] if len(parts) > 1 else parts)
 
     resp = _json_response(result)
     _log_query("get_chain", {"slug": slug}, len(resp), (time.time() - t0) * 1000)
@@ -222,6 +228,7 @@ async def get_chain(slug: str) -> str:
 
 
 # ── Tool 3: Search Opportunities ────────────────────────
+
 
 @mcp.tool()
 async def search_opportunities(
@@ -246,13 +253,16 @@ async def search_opportunities(
     t0 = time.time()
     limit = min(limit, 50)
 
-    data = _api_get("/opportunities", {
-        "chain": chain,
-        "opportunity_type": opportunity_type,
-        "intent": intent,
-        "sort": sort,
-        "limit": limit,
-    })
+    data = _api_get(
+        "/opportunities",
+        {
+            "chain": chain,
+            "opportunity_type": opportunity_type,
+            "intent": intent,
+            "sort": sort,
+            "limit": limit,
+        },
+    )
 
     items = []
     for r in data.get("items", [])[:limit]:
@@ -274,11 +284,17 @@ async def search_opportunities(
         items.append(item)
 
     result = _json_response({"opportunities": items, "total": len(items), "sort": sort})
-    _log_query("search_opportunities", {"chain": chain, "type": opportunity_type, "intent": intent}, len(result), (time.time() - t0) * 1000)
+    _log_query(
+        "search_opportunities",
+        {"chain": chain, "type": opportunity_type, "intent": intent},
+        len(result),
+        (time.time() - t0) * 1000,
+    )
     return result
 
 
 # ── Tool 4: Discover Feed ───────────────────────────────
+
 
 @mcp.tool()
 async def discover() -> str:
@@ -337,6 +353,7 @@ async def discover() -> str:
 
 # ── Tool 5: Chain Recommendation ────────────────────────
 
+
 @mcp.tool()
 async def recommend_chain(
     use_case: str,
@@ -375,26 +392,33 @@ async def recommend_chain(
         if "evm" in priority_list and r.get("evm_compatible"):
             score += 5
 
-        chains_data.append({
-            "chain": _format_chain(r),
-            "score": round(score, 2),
-            "opportunities": r.get("opportunity_count", 0),
-        })
+        chains_data.append(
+            {
+                "chain": _format_chain(r),
+                "score": round(score, 2),
+                "opportunities": r.get("opportunity_count", 0),
+            }
+        )
 
     chains_data.sort(key=lambda x: x["score"], reverse=True)
     top = chains_data[:5]
 
-    resp = _json_response({
-        "use_case": use_case,
-        "priorities": priority_list,
-        "recommendations": top,
-        "note": "Scores are relative rankings based on on-chain metrics. Higher = better fit for stated priorities.",
-    })
-    _log_query("recommend_chain", {"use_case": use_case, "priorities": priorities}, len(resp), (time.time() - t0) * 1000)
+    resp = _json_response(
+        {
+            "use_case": use_case,
+            "priorities": priority_list,
+            "recommendations": top,
+            "note": "Scores are relative rankings based on on-chain metrics. Higher = better fit for stated priorities.",
+        }
+    )
+    _log_query(
+        "recommend_chain", {"use_case": use_case, "priorities": priorities}, len(resp), (time.time() - t0) * 1000
+    )
     return resp
 
 
 # ── Tool 6: Developer Activity ──────────────────────────
+
 
 @mcp.tool()
 async def get_developer_activity(slug: str, weeks: int = 12) -> str:
@@ -428,17 +452,20 @@ async def get_developer_activity(slug: str, weeks: int = 12) -> str:
         for r in data.get("items", [])
     ]
 
-    resp = _json_response({
-        "chain": data.get("chain", slug),
-        "slug": slug,
-        "weeks": len(activity),
-        "activity": activity,
-    })
+    resp = _json_response(
+        {
+            "chain": data.get("chain", slug),
+            "slug": slug,
+            "weeks": len(activity),
+            "activity": activity,
+        }
+    )
     _log_query("get_developer_activity", {"slug": slug, "weeks": weeks}, len(resp), (time.time() - t0) * 1000)
     return resp
 
 
 # ── Tool 7: Sector Intelligence ─────────────────────────
+
 
 @mcp.tool()
 async def get_sectors() -> str:
@@ -469,6 +496,7 @@ async def get_sectors() -> str:
 
 # ── Tool 8: Platform Stats ──────────────────────────────
 
+
 @mcp.tool()
 async def get_stats() -> str:
     """Get DevAlpha platform-wide statistics.
@@ -487,6 +515,7 @@ async def get_stats() -> str:
 
 # ── Tool 9: Chain Slugs ─────────────────────────────────
 
+
 @mcp.tool()
 async def get_chain_slugs() -> str:
     """Get all valid chain slugs. Use this to discover valid chain identifiers
@@ -498,8 +527,7 @@ async def get_chain_slugs() -> str:
 
     data = _api_get("/chains")
     chains = [
-        {"name": r.get("name"), "slug": r.get("slug"), "type": r.get("chain_type")}
-        for r in data.get("items", [])
+        {"name": r.get("name"), "slug": r.get("slug"), "type": r.get("chain_type")} for r in data.get("items", [])
     ]
 
     result = _json_response({"chains": chains, "total": len(chains)})
@@ -508,6 +536,7 @@ async def get_chain_slugs() -> str:
 
 
 # ── Tool 10: Full-Text Search ───────────────────────────
+
 
 @mcp.tool()
 async def search_text(query: str, limit: int = 20) -> str:
@@ -548,6 +577,7 @@ async def search_text(query: str, limit: int = 20) -> str:
 
 # ── Tool 11: MCP Usage Stats ────────────────────────────
 
+
 @mcp.tool()
 async def get_mcp_usage() -> str:
     """Get MCP server usage statistics — query counts, popular tools, recent activity.
@@ -580,16 +610,19 @@ async def get_mcp_usage() -> str:
                     continue
 
         popular = sorted(tool_counts.items(), key=lambda x: x[1], reverse=True)
-        return _json_response({
-            "total_queries": total,
-            "tools": {k: v for k, v in popular},
-            "recent": recent[-5:],
-        })
+        return _json_response(
+            {
+                "total_queries": total,
+                "tools": {k: v for k, v in popular},
+                "recent": recent[-5:],
+            }
+        )
     except Exception as e:
         return _json_response({"error": str(e)})
 
 
 # ── Entry Point ──────────────────────────────────────────
+
 
 def main():
     transport = "stdio"
