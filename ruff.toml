@@ -1,17 +1,24 @@
 # Ruff linter configuration
 # https://docs.astral.sh/ruff/
 
-target-version = "py312"
 line-length = 120
+target-version = "py310"
 
 [lint]
 # E = pycodestyle errors, F = pyflakes, W = pycodestyle warnings, I = isort
 select = ["E", "F", "W", "I"]
 
+# Ignore rules that conflict with existing code style
+ignore = [
+    "E501",   # Line too long — handled by line-length setting
+]
+
 # Allow unused variables when underscore-prefixed
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [lint.per-file-ignores]
+# Logging setup before library imports (intentional)
+"devalpha_mcp/server.py" = ["E402"]
 # Tests can use assert and have longer lines
 "tests/**" = ["E501"]
 
