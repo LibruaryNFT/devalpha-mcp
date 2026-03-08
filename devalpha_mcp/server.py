@@ -20,8 +20,19 @@ import sys
 import time
 from datetime import datetime, timezone
 
-logging.basicConfig(level=logging.INFO, stream=sys.stderr)
-logger = logging.getLogger("devalpha-mcp")
+import structlog
+
+structlog.configure(
+    processors=[
+        structlog.processors.add_log_level,
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.JSONRenderer(),
+    ],
+    wrapper_class=structlog.make_filtering_bound_logger(
+        getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper(), logging.INFO)
+    ),
+)
+logger = structlog.get_logger("devalpha-mcp")
 
 import httpx
 from mcp.server.fastmcp import FastMCP
@@ -631,7 +642,7 @@ def main():
         if idx + 1 < len(sys.argv):
             transport = sys.argv[idx + 1]
 
-    logger.info(f"Starting DevAlpha MCP server (transport={transport}, api={API_BASE})")
+    logger.info("server_starting", transport=transport, api_base=API_BASE)
     mcp.run(transport=transport)
 
 
