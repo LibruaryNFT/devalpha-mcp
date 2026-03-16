@@ -24,5 +24,4 @@ jobs:
     with:
       project: 'devalpha-mcp'
     secrets:
-      CC_PAT: ${{ secrets.CC_PAT }}
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
