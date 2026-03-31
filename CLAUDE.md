@@ -1,23 +1,24 @@
 # DevAlpha MCP Server
 
-## Command Center
+## Eco
 
-This project is part of the LibruaryNFT agent network, coordinated by the command center at `c:\Code\command-center`.
+This project is part of the LibruaryNFT agent network, coordinated by Eco at `c:\Code\eco`.
 
 | Resource | Path |
 |----------|------|
-| Task list | `c:\Code\command-center\TODO.md` |
-| Deployment log | `c:\Code\command-center\deployments\log.md` |
-| Incident log | `c:\Code\command-center\incidents\log.md` |
-| Cost tracker | `c:\Code\command-center\costs\tracker.md` |
-| Agent registry | `c:\Code\command-center\agents\registry.md` |
+| Roadmap | `c:\Code\eco\docs\ROADMAP.md` |
+| Deployment log | `c:\Code\eco\intel\reports\deployments.md` |
+| Incident log | `c:\Code\eco\intel\reports\incidents.md` |
+| Cost tracker | `c:\Code\eco\intel\costs\` |
+| Agent registry | `c:\Code\eco\intel\agents\registry.md` |
+| Testing standards | `c:\Code\eco\intel\quality\standards.md` |
 
-**Session start:** Read this repo's CLAUDE.md (especially Current Status). Check TODO.md for active tasks.
+**Session start:** Read this repo's CLAUDE.md (especially Current Status). Check ROADMAP.md for active tasks.
 
 **After completing work:**
 1. Update this repo's **Current Status** section below (milestones, what's next)
-2. Update command center files: mark TODOs done, log deployments, log incidents
-3. Follow commit format and conventions in `c:\Code\command-center\CONVENTIONS.md`
+2. Update Eco files: mark tasks done, log deployments, log incidents
+3. Follow commit format and conventions in `c:\Code\eco\intel\quality\CONVENTIONS.md`
 
 ## Current Status
 
