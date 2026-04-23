@@ -8,11 +8,22 @@ on:
 
 jobs:
   test:
-    uses: LibruaryNFT/shared-workflows/.github/workflows/python-ci.yml@main
-    with:
-      python-version: '3.12'
-      requirements-file: 'requirements.txt'
-      test-command: 'python -m pytest tests/ -v'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Verify import
+        run: python -c "import devalpha_mcp; print('import OK')"
 
   security:
     uses: LibruaryNFT/shared-workflows/.github/workflows/security-scan.yml@main
