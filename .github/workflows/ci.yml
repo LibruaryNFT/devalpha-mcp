@@ -31,6 +31,8 @@ jobs:
   notify:
     needs: [test, security]
     if: failure()
+    permissions:
+      issues: write
     uses: LibruaryNFT/shared-workflows/.github/workflows/notify-failure.yml@main
     with:
       project: 'devalpha-mcp'
