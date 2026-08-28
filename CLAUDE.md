@@ -2,23 +2,23 @@
 
 ## Eco
 
-This project is part of the LibruaryNFT agent network, coordinated by Eco at `c:\Code\eco`.
+This project is part of the LibruaryNFT agent network, coordinated by Eco (the `eco` repo).
 
 | Resource | Path |
 |----------|------|
-| Roadmap | `c:\Code\eco\docs\ROADMAP.md` |
-| Deployment log | `c:\Code\eco\intel\reports\deployments.md` |
-| Incident log | `c:\Code\eco\intel\reports\incidents.md` |
-| Cost tracker | `c:\Code\eco\intel\costs\` |
-| Agent registry | `c:\Code\eco\intel\agents\registry.md` |
-| Testing standards | `c:\Code\eco\intel\quality\standards.md` |
+| Roadmap | `eco/docs/ROADMAP.md` |
+| Deployment log | `eco/intel/reports/deployments.md` |
+| Incident log | `eco/intel/reports/incidents.md` |
+| Cost tracker | `eco/intel/costs/` |
+| Agent registry | `eco/intel/agents/registry.md` |
+| Testing standards | `eco/intel/quality/standards.md` |
 
 **Session start:** Read this repo's CLAUDE.md (especially Current Status). Check ROADMAP.md for active tasks.
 
 **After completing work:**
 1. Update this repo's **Current Status** section below (milestones, what's next)
 2. Update Eco files: mark tasks done, log deployments, log incidents
-3. Follow commit format and conventions in `c:\Code\eco\intel\quality\CONVENTIONS.md`
+3. Follow commit format and conventions in `eco/intel/quality/CONVENTIONS.md`
 
 ## Current Status
 
@@ -39,7 +39,7 @@ Public MCP (Model Context Protocol) server that gives AI agents access to DevAlp
 - Reads from DevAlpha API at devalpha.dev
 
 ## Parent Project
-- Main repo: `c:\Code\devalpha` — the full DevAlpha platform
+- Main repo: `devalpha` — the full DevAlpha platform
 - This is a lightweight client that queries the DevAlpha API
 
 ## Publishing
